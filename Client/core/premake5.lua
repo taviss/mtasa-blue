@@ -53,7 +53,7 @@ project "Client Core"
 
 	defines {
 		"INITGUID",
-		"_WIN32_WINNT=0x502",
+		"_WIN32_WINNT=0x601",
 		"PNG_SETJMP_NOT_SUPPORTED"
 	}
 
