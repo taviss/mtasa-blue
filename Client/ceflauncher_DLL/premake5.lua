@@ -9,7 +9,6 @@ project "CEFLauncher DLL"
 	}
 
 	defines { "UNICODE" }
-	linkoptions { "\"/manifestdependency:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"" }
 	
 	vpaths { 
 		["Headers/*"] = "**.h",
@@ -25,6 +24,9 @@ project "CEFLauncher DLL"
 	}
 	
 	links { "CEF",  "../../vendor/cef3/Release/libcef.lib" }
+	
+	filter "system:windows"
+		files { "compatibility.manifest" }
 
 	filter "architecture:x64"
 		flags { "ExcludeFromBuild" } 
