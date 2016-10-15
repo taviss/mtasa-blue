@@ -6,7 +6,7 @@ project "Client Core"
 	
 	filter "system:windows"
 		includedirs { "../../vendor/sparsehash/current/src/windows" }
-		linkoptions { "/SAFESEH\:NO", "\"/manifestdependency:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"" }
+		linkoptions { "/SAFESEH\:NO" }
 		buildoptions { "-Zm130" }
 		files { "compatibility.manifest" }
 	
