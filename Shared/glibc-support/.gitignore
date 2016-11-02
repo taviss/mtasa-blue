@@ -1,0 +1,3 @@
+# These folders should never be committed
+x64/
+x86/

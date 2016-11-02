@@ -13,6 +13,15 @@ else
 	CI_BUILD = false
 end 
 
+-- Set glibc compatibilty mode 
+local glibc = os.getenv("GLIBC_COMPAT")
+if glibc and glibc:lower() == "true" then 
+	GLIBC_COMPAT = true 
+else 
+	GLIBC_COMPAT = false
+end 
+
+
 workspace "MTASA"
 	configurations {"Debug", "Release", "Nightly"}
 	platforms { "x86", "x64"}
@@ -22,6 +31,7 @@ workspace "MTASA"
 	startproject "Client Launcher"
 	
 	flags { "C++11" }
+	
 	characterset "MBCS"
 	pic "On"
 	symbols "On"
@@ -42,6 +52,17 @@ workspace "MTASA"
 	-- Helper function for output path 
 	buildpath = function(p) return "%{wks.location}/../Bin/"..p.."/" end
 	copy = function(p) return "{COPY} %{cfg.buildtarget.abspath} %{wks.location}../Bin/"..p.."/" end 
+	
+	if GLIBC_COMPAT then 
+		filter { "system:linux" }
+			includedirs "Shared/glibc-support"
+			linkoptions "-static-libstdc++ -static-libgcc"
+			forceincludes  { "glibc_version.h" }
+		filter {"system:linux", "platforms:x86"}
+			libdirs { "Shared/glibc-support/x86" }
+		filter {"system:linux", "platforms:x64"}
+			libdirs { "Shared/glibc-support/x64" }
+	end 
 	
 	filter "platforms:x86"
 		architecture "x86"
