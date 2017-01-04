@@ -1128,3 +1128,9 @@ LUA_API int luaX_is_apicheck_enabled()
     return 0;
 }
 #endif
+
+// MTA addition to speed up GC
+LUA_API void lua_addtotalbytes (lua_State *L, int b) {
+  global_State *g = G(L);
+  g->totalbytes += b;
+}

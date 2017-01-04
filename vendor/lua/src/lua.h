@@ -244,6 +244,7 @@ LUA_API int  (lua_status) (lua_State *L);
 #define LUA_GCSETSTEPMUL	7
 
 LUA_API int (lua_gc) (lua_State *L, int what, int data);
+LUA_API void lua_addtotalbytes (lua_State *L, int b);
 
 
 /*

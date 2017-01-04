@@ -126,6 +126,7 @@ int CLuaMatrixDefs::Destroy ( lua_State* luaVM )
     if ( !argStream.HasErrors () )
     {
         delete pMatrix;
+        lua_addtotalbytes( luaVM, -30 );
         lua_pushboolean ( luaVM, true );
         return 1;
     }
